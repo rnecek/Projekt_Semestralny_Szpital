@@ -156,10 +156,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SzpitalDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="SzpitalDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>SzpitalDB.mdf</DependentUpon>
     </Content>
     <Content Include="ZarzadzanieSzpitalem.Context.tt">
