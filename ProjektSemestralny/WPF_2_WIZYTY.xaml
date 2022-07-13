@@ -5,9 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektSemestralny"
         mc:Ignorable="d"
-        Title="WPF_2_WIZYTY" Height="450" Width="600" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <DataGrid x:Name="gridWizyty" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,10,10,297"/>
+        Title="WPF_2_WIZYTY" Height="1082" Width="1162">
+    <Grid Margin="10,0,0,0" Height="1072" VerticalAlignment="Top">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="61*"/>
+            <ColumnDefinition Width="83*"/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid x:Name="gridWizyty" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="43,19,26,900" Grid.ColumnSpan="2"/>
+        <Button x:Name="btnOdswiez" Content="Odswiez Liste" HorizontalAlignment="Left" Margin="518,157,0,0" VerticalAlignment="Top" Height="29" Width="120" Click="btnOdswiez_Click" Grid.Column="1"/>
+        <TextBox x:Name="txtIDDoktora" TextWrapping="Wrap" Text="" Margin="265,195,22,847"/>
+        <Label Content="ID Doktora" Margin="187,194,228,847"/>
+        <TextBox x:Name="txtIDPacjenta" TextWrapping="Wrap" Text="" Margin="265,248,22,802"/>
+        <Label Content="ID Pacjenta" Margin="187,243,228,797"/>
+        <TextBox x:Name="txtDataWizyty" TextWrapping="Wrap" Text="mm/dd/yyyy hh:mm:ss" Margin="265,292,22,741"/>
+        <Label Content="Data" Margin="187,297,228,746"/>
+        <Button x:Name="btnAdd" Content="Dodaj wizytę" HorizontalAlignment="Left" Margin="372,348,0,0" VerticalAlignment="Top" Width="94" Click="btnAdd_Click" Height="20" RenderTransformOrigin="0.628,0.902"/>
+
 
     </Grid>
 </Window>

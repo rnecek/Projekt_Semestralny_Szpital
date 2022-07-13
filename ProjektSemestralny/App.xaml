@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ProjektSemestralny"
              
-             StartupUri="WPF_1_ZS.xaml">
+             StartupUri="WPF_0_Start.xaml">
     <!-- StartupUri="WPF_2_Wizyty.xaml" --> 
 
     <Application.Resources>

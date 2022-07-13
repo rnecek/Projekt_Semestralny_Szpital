@@ -43,15 +43,55 @@ namespace ProjektSemestralny
                                        from a in d.Wizyties.DefaultIfEmpty()
                                        select new
                                        {
-                                           ImieDoktora = d.Imie,
-                                           NazwiskoDoktora = d.Nazwisko,
                                            IDWizyty = a.Id.ToString(),
+                                           IDDoktora = d.Id,
+                                           ImieDoktora = d.Imie,
+                                           NazwiskoDoktora = d.Nazwisko,                                           
                                            a.DataWizyty,
+                                           IDPacjenta = a.PacjentID,
                                            ImiePacjenta = a.Pacjenci.Imie,
                                            NazwiskoPacjenta = a.Pacjenci.Nazwisko
                                        };
 
             this.gridWizyty.ItemsSource = resultWizytyDoktorow.ToList();
+
+        }
+
+        private int odswiezanieID = 0;
+        private void btnOdswiez_Click(object sender, RoutedEventArgs e)
+        {
+            SzpitalDBEntities db = new SzpitalDBEntities();
+
+            var resultWizytyDoktorow = from d in db.Doktorzies
+                                       from a in d.Wizyties.DefaultIfEmpty()
+                                       select new
+                                       {
+                                           IDWizyty = a.Id.ToString(),
+                                           IDDoktora = d.Id,
+                                           ImieDoktora = d.Imie,
+                                           NazwiskoDoktora = d.Nazwisko,
+                                           a.DataWizyty,
+                                           IDPacjenta = a.PacjentID,
+                                           ImiePacjenta = a.Pacjenci.Imie,
+                                           NazwiskoPacjenta = a.Pacjenci.Nazwisko
+                                       };
+            this.gridWizyty.ItemsSource = resultWizytyDoktorow.ToList();
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            SzpitalDBEntities db = new SzpitalDBEntities();
+
+            Wizyty wizytyObject = new Wizyty()
+            {
+                DoktorID = int.Parse(txtIDDoktora.Text),
+                PacjentID = int.Parse(txtIDPacjenta.Text),
+                DataWizyty = DateTime.Parse(txtDataWizyty.Text)
+            };
+
+            db.Wizyties.Add(wizytyObject);
+            db.SaveChanges();
+
         }
     }
 }

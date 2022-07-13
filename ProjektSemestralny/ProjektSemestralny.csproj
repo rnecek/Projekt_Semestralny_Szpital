@@ -91,6 +91,9 @@
     <Compile Include="Wizyty.cs">
       <DependentUpon>ZarzadzanieSzpitalem.tt</DependentUpon>
     </Compile>
+    <Compile Include="WPF_0_Start.xaml.cs">
+      <DependentUpon>WPF_0_Start.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WPF_1_ZS.xaml.cs">
       <DependentUpon>WPF_1_ZS.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="WPF_0_Start.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WPF_1_ZS.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
