@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SzpitalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SzpitalDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Doktorzy">
           <Key>
             <PropertyRef Name="Id" />
@@ -13,12 +13,93 @@
           <Property Name="Imie" Type="varchar" MaxLength="50" />
           <Property Name="Nazwisko" Type="varchar" MaxLength="50" />
           <Property Name="Specjalizacja" Type="varchar" MaxLength="80" />
+          <Property Name="Wiek" Type="int" />
         </EntityType>
+        <EntityType Name="Pacjenci">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="varchar" MaxLength="50" />
+          <Property Name="Nazwisko" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="20" />
+          <Property Name="Adres" Type="varchar" MaxLength="150" />
+          <Property Name="Wiek" Type="int" />
+        </EntityType>
+        <EntityType Name="Wizyty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoktorID" Type="int" />
+          <Property Name="PacjentID" Type="int" />
+          <Property Name="DataWizyty" Type="datetime" />
+          <Property Name="GodzinaWizyty" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Zarobki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoktorID" Type="int" />
+          <Property Name="Kwota" Type="int" />
+          <Property Name="Staz" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Wizyty_Doktorzy">
+          <End Role="Doktorzy" Type="Self.Doktorzy" Multiplicity="0..1" />
+          <End Role="Wizyty" Type="Self.Wizyty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktorzy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wizyty">
+              <PropertyRef Name="DoktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wizyty_Pacjenci">
+          <End Role="Pacjenci" Type="Self.Pacjenci" Multiplicity="0..1" />
+          <End Role="Wizyty" Type="Self.Wizyty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacjenci">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wizyty">
+              <PropertyRef Name="PacjentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zarobki_Doktorzy">
+          <End Role="Doktorzy" Type="Self.Doktorzy" Multiplicity="0..1" />
+          <End Role="Zarobki" Type="Self.Zarobki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktorzy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zarobki">
+              <PropertyRef Name="DoktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="SzpitalDBModelStoreContainer">
           <EntitySet Name="Doktorzy" EntityType="Self.Doktorzy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pacjenci" EntityType="Self.Pacjenci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wizyty" EntityType="Self.Wizyty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zarobki" EntityType="Self.Zarobki" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Wizyty_Doktorzy" Association="Self.FK_Wizyty_Doktorzy">
+            <End Role="Doktorzy" EntitySet="Doktorzy" />
+            <End Role="Wizyty" EntitySet="Wizyty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wizyty_Pacjenci" Association="Self.FK_Wizyty_Pacjenci">
+            <End Role="Pacjenci" EntitySet="Pacjenci" />
+            <End Role="Wizyty" EntitySet="Wizyty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zarobki_Doktorzy" Association="Self.FK_Zarobki_Doktorzy">
+            <End Role="Doktorzy" EntitySet="Doktorzy" />
+            <End Role="Zarobki" EntitySet="Zarobki" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SzpitalDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -30,10 +111,98 @@
           <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Specjalizacja" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Wiek" Type="Int32" />
+          <NavigationProperty Name="Wizyties" Relationship="SzpitalDBModel.FK_Wizyty_Doktorzy" FromRole="Doktorzy" ToRole="Wizyty" />
+          <NavigationProperty Name="Zarobkis" Relationship="SzpitalDBModel.FK_Zarobki_Doktorzy" FromRole="Doktorzy" ToRole="Zarobki" />
         </EntityType>
         <EntityContainer Name="SzpitalDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Doktorzies" EntityType="Self.Doktorzy" />
+          <EntitySet Name="Pacjencis" EntityType="SzpitalDBModel.Pacjenci" />
+          <EntitySet Name="Wizyties" EntityType="SzpitalDBModel.Wizyty" />
+          <EntitySet Name="Zarobkis" EntityType="SzpitalDBModel.Zarobki" />
+          <AssociationSet Name="FK_Wizyty_Doktorzy" Association="SzpitalDBModel.FK_Wizyty_Doktorzy">
+            <End Role="Doktorzy" EntitySet="Doktorzies" />
+            <End Role="Wizyty" EntitySet="Wizyties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zarobki_Doktorzy" Association="SzpitalDBModel.FK_Zarobki_Doktorzy">
+            <End Role="Doktorzy" EntitySet="Doktorzies" />
+            <End Role="Zarobki" EntitySet="Zarobkis" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Wizyty_Pacjenci" Association="SzpitalDBModel.FK_Wizyty_Pacjenci">
+            <End Role="Pacjenci" EntitySet="Pacjencis" />
+            <End Role="Wizyty" EntitySet="Wizyties" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Pacjenci">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Wiek" Type="Int32" />
+          <NavigationProperty Name="Wizyties" Relationship="SzpitalDBModel.FK_Wizyty_Pacjenci" FromRole="Pacjenci" ToRole="Wizyty" />
+        </EntityType>
+        <EntityType Name="Wizyty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoktorID" Type="Int32" />
+          <Property Name="PacjentID" Type="Int32" />
+          <Property Name="DataWizyty" Type="DateTime" Precision="3" />
+          <Property Name="GodzinaWizyty" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Doktorzy" Relationship="SzpitalDBModel.FK_Wizyty_Doktorzy" FromRole="Wizyty" ToRole="Doktorzy" />
+          <NavigationProperty Name="Pacjenci" Relationship="SzpitalDBModel.FK_Wizyty_Pacjenci" FromRole="Wizyty" ToRole="Pacjenci" />
+        </EntityType>
+        <EntityType Name="Zarobki">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoktorID" Type="Int32" />
+          <Property Name="Kwota" Type="Int32" />
+          <Property Name="Staz" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Doktorzy" Relationship="SzpitalDBModel.FK_Zarobki_Doktorzy" FromRole="Zarobki" ToRole="Doktorzy" />
+        </EntityType>
+        <Association Name="FK_Wizyty_Doktorzy">
+          <End Type="SzpitalDBModel.Doktorzy" Role="Doktorzy" Multiplicity="0..1" />
+          <End Type="SzpitalDBModel.Wizyty" Role="Wizyty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktorzy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wizyty">
+              <PropertyRef Name="DoktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zarobki_Doktorzy">
+          <End Type="SzpitalDBModel.Doktorzy" Role="Doktorzy" Multiplicity="0..1" />
+          <End Type="SzpitalDBModel.Zarobki" Role="Zarobki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doktorzy">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zarobki">
+              <PropertyRef Name="DoktorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Wizyty_Pacjenci">
+          <End Type="SzpitalDBModel.Pacjenci" Role="Pacjenci" Multiplicity="0..1" />
+          <End Type="SzpitalDBModel.Wizyty" Role="Wizyty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pacjenci">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Wizyty">
+              <PropertyRef Name="PacjentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -43,10 +212,44 @@
           <EntitySetMapping Name="Doktorzies">
             <EntityTypeMapping TypeName="SzpitalDBModel.Doktorzy">
               <MappingFragment StoreEntitySet="Doktorzy">
+                <ScalarProperty Name="Wiek" ColumnName="Wiek" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Imie" ColumnName="Imie" />
                 <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
                 <ScalarProperty Name="Specjalizacja" ColumnName="Specjalizacja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pacjencis">
+            <EntityTypeMapping TypeName="SzpitalDBModel.Pacjenci">
+              <MappingFragment StoreEntitySet="Pacjenci">
+                <ScalarProperty Name="Wiek" ColumnName="Wiek" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wizyties">
+            <EntityTypeMapping TypeName="SzpitalDBModel.Wizyty">
+              <MappingFragment StoreEntitySet="Wizyty">
+                <ScalarProperty Name="GodzinaWizyty" ColumnName="GodzinaWizyty" />
+                <ScalarProperty Name="DataWizyty" ColumnName="DataWizyty" />
+                <ScalarProperty Name="PacjentID" ColumnName="PacjentID" />
+                <ScalarProperty Name="DoktorID" ColumnName="DoktorID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zarobkis">
+            <EntityTypeMapping TypeName="SzpitalDBModel.Zarobki">
+              <MappingFragment StoreEntitySet="Zarobki">
+                <ScalarProperty Name="Staz" ColumnName="Staz" />
+                <ScalarProperty Name="Kwota" ColumnName="Kwota" />
+                <ScalarProperty Name="DoktorID" ColumnName="DoktorID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,9 +14,22 @@ namespace ProjektSemestralny
     
     public partial class Doktorzy
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Doktorzy()
+        {
+            this.Wizyties = new HashSet<Wizyty>();
+            this.Zarobkis = new HashSet<Zarobki>();
+        }
+    
         public int Id { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public string Specjalizacja { get; set; }
+        public Nullable<int> Wiek { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Wizyty> Wizyties { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Zarobki> Zarobkis { get; set; }
     }
 }

@@ -21,13 +21,15 @@
         <Button x:Name="btnDodaj" Content="Dodaj rekord" HorizontalAlignment="Left" Margin="216,118,0,0" VerticalAlignment="Top" FontSize="16" FontFamily="Barlow Condensed Light" Click="btnDodaj_Click" Width="86"/>
         <Button x:Name="btnRefresh" Content="Odswiez liste" HorizontalAlignment="Left" Margin="9,0,0,0" VerticalAlignment="Center" Width="116" FontSize="16" FontFamily="Barlow Condensed Light" Click="btnRefresh_Click"/>
         <Button x:Name="btnUpdateDoctor" Content="Edytuj rekord" HorizontalAlignment="Left" Margin="169,375,0,0" VerticalAlignment="Top" Width="124" FontSize="16" FontFamily="Barlow Condensed Light" Click="btnUpdateDoctor_Click" Grid.Column="1"/>
-        <Label Content="Imie" HorizontalAlignment="Left" Margin="87,270,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.695" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1" Height="32" Width="34"/>
-        <TextBox x:Name="txtImie2" HorizontalAlignment="Left" Margin="169,273,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124" Height="29" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1"/>
-        <Label Content="Nazwisko" HorizontalAlignment="Left" Margin="87,304,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.695" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1" Height="31" Width="62"/>
-        <TextBox x:Name="txtNazwisko2" HorizontalAlignment="Left" Margin="169,307,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124" Height="28" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1"/>
-        <Label Content="Specjalizacja" HorizontalAlignment="Left" Margin="87,338,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.695" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1" Height="32" Width="82"/>
-        <TextBox x:Name="txtSpecjalizacja2" HorizontalAlignment="Left" Margin="169,340,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124" Height="28" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1"/>
+        <Label Content="Imie" HorizontalAlignment="Left" Margin="87,232,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.695" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1" Height="32" Width="34"/>
+        <TextBox x:Name="txtImie2" HorizontalAlignment="Left" Margin="169,235,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124" Height="29" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1"/>
+        <Label Content="Nazwisko" HorizontalAlignment="Left" Margin="87,266,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.695" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1" Height="31" Width="62"/>
+        <TextBox x:Name="txtNazwisko2" HorizontalAlignment="Left" Margin="169,269,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124" Height="28" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1"/>
+        <Label Content="Specjalizacja" HorizontalAlignment="Left" Margin="87,300,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.695" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1" Height="32" Width="82"/>
+        <TextBox x:Name="txtSpecjalizacja2" HorizontalAlignment="Left" Margin="169,302,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124" Height="28" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1"/>
         <Button x:Name="btnDeleteDoctor" Content="Usuń rekord" HorizontalAlignment="Left" Margin="292,375,0,0" VerticalAlignment="Top" Width="124" FontSize="16" FontFamily="Barlow Condensed Light" Click="btnDeleteDoctor_Click"/>
+        <Label Content="Wiek;" HorizontalAlignment="Left" Margin="87,335,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.553,0.695" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1" Height="32" Width="82"/>
+        <TextBox x:Name="txtWiek2" HorizontalAlignment="Left" Margin="169,337,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="124" Height="28" FontSize="16" FontFamily="Barlow Condensed Light" Grid.Column="1"/>
 
     </Grid>
 </Window>

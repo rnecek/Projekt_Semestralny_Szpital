@@ -5,7 +5,13 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="9fd97e6a23e64135a75adda2c123b004" Name="Diagram1">
-        <EntityTypeShape EntityType="SzpitalDBModel.Doktorzy" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SzpitalDBModel.Doktorzy" Width="1.5" PointX="4.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SzpitalDBModel.Pacjenci" Width="1.5" PointX="4.125" PointY="3.75" />
+        <EntityTypeShape EntityType="SzpitalDBModel.Wizyty" Width="1.5" PointX="7.125" PointY="2.375" />
+        <EntityTypeShape EntityType="SzpitalDBModel.Zarobki" Width="1.5" PointX="0.625" PointY="0.5" />
+        <AssociationConnector Association="SzpitalDBModel.FK_Wizyty_Doktorzy" />
+        <AssociationConnector Association="SzpitalDBModel.FK_Zarobki_Doktorzy" />
+        <AssociationConnector Association="SzpitalDBModel.FK_Wizyty_Pacjenci" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -82,6 +82,8 @@ namespace ProjektSemestralny
                         this.txtImie2.Text = d.Imie;
                         this.txtNazwisko2.Text = d.Nazwisko;
                         this.txtSpecjalizacja2.Text = d.Specjalizacja;
+                        this.txtWiek2.Text = d.Wiek.ToString();
+                        
                         this.odswiezanieID = d.Id;
                     }
                 }
@@ -103,6 +105,7 @@ namespace ProjektSemestralny
                 obj.Imie = this.txtImie2.Text;
                 obj.Nazwisko = this.txtNazwisko2.Text;
                 obj.Specjalizacja = this.txtSpecjalizacja2.Text;
+                obj.Wiek = int.Parse(this.txtWiek2.Text);
             }
 
             db.SaveChanges();
