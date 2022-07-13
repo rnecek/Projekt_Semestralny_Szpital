@@ -85,8 +85,20 @@
     <Compile Include="Doktorzy.cs">
       <DependentUpon>ZarzadzanieSzpitalem.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pacjenci.cs">
+      <DependentUpon>ZarzadzanieSzpitalem.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Wizyty.cs">
+      <DependentUpon>ZarzadzanieSzpitalem.tt</DependentUpon>
+    </Compile>
     <Compile Include="WPF_1_ZS.xaml.cs">
       <DependentUpon>WPF_1_ZS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WPF_2_WIZYTY.xaml.cs">
+      <DependentUpon>WPF_2_WIZYTY.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Zarobki.cs">
+      <DependentUpon>ZarzadzanieSzpitalem.tt</DependentUpon>
     </Compile>
     <Compile Include="ZarzadzanieSzpitalem.Context.cs">
       <AutoGen>True</AutoGen>
@@ -116,6 +128,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="WPF_1_ZS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WPF_2_WIZYTY.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

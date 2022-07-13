@@ -26,5 +26,8 @@ namespace ProjektSemestralny
         }
     
         public virtual DbSet<Doktorzy> Doktorzies { get; set; }
+        public virtual DbSet<Pacjenci> Pacjencis { get; set; }
+        public virtual DbSet<Wizyty> Wizyties { get; set; }
+        public virtual DbSet<Zarobki> Zarobkis { get; set; }
     }
 }
