@@ -68,14 +68,74 @@ namespace ProjektSemestralny
             this.gridDoctors.ItemsSource = db.Doktorzies.ToList();
         }
 
+        private int odswiezanieID = 0;
+
         private void gridDoctors_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Console.WriteLine(this.gridDoctors.SelectedItems);
+            if (this.gridDoctors.SelectedIndex >= 0)
+            {
+                if (this.gridDoctors.SelectedItems.Count >= 0)
+                {
+                    if (this.gridDoctors.SelectedItems[0].GetType() == typeof(Doktorzy))
+                    {
+                        Doktorzy d = (Doktorzy)this.gridDoctors.SelectedItems[0];
+                        this.txtImie2.Text = d.Imie;
+                        this.txtNazwisko2.Text = d.Nazwisko;
+                        this.txtSpecjalizacja2.Text = d.Specjalizacja;
+                        this.odswiezanieID = d.Id;
+                    }
+                }
+            }
         }
 
         private void btnUpdateDoctor_Click(object sender, RoutedEventArgs e)
         {
+            SzpitalDBEntities db = new SzpitalDBEntities();
 
+            var r = from d in db.Doktorzies
+                    where d.Id == this.odswiezanieID
+                    select d;
+
+            Doktorzy obj = r.SingleOrDefault();
+
+            if (obj != null)
+            {
+                obj.Imie = this.txtImie2.Text;
+                obj.Nazwisko = this.txtNazwisko2.Text;
+                obj.Specjalizacja = this.txtSpecjalizacja2.Text;
+            }
+
+            db.SaveChanges();
+
+        }
+
+        private void btnDeleteDoctor_Click(object sender, RoutedEventArgs e)
+        {
+                MessageBoxResult msgBoxResult = MessageBox.Show("Czy jesteś pewien usunięcia wybranego rekordu?",
+                "Usuń rekord",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning,
+                MessageBoxResult.No);
+
+            if (msgBoxResult == MessageBoxResult.Yes)
+            {
+
+                SzpitalDBEntities db = new SzpitalDBEntities();
+
+                var r = from d in db.Doktorzies
+                        where d.Id == this.odswiezanieID
+                        select d;
+
+                Doktorzy obj = r.SingleOrDefault();
+
+                if (obj != null)
+                {
+                    db.Doktorzies.Remove(obj);
+                    db.SaveChanges();
+                }
+            }
+
+            
         }
     }
 }
